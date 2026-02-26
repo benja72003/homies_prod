@@ -13,11 +13,10 @@ body {
     color: #ffffff;
     padding: 2rem;
     background-image: radial-gradient(circle at 15% 50%, rgba(40, 40, 40, 0.4), transparent 50%);
-    cursor: none; /* Oculta el cursor por defecto */
+    cursor: none; 
     overflow-x: hidden;
 }
 
-/* Efecto de Ruido (Film Grain) en el fondo */
 body::before {
     content: "";
     position: fixed;
@@ -50,7 +49,6 @@ a, .bento-item, .btn {
     transition: width 0.2s, height 0.2s, background-color 0.2s; 
 }
 
-/* Interacción del cursor al pasar por tarjetas o botones */
 .bento-item:hover ~ .cursor, a:hover ~ .cursor {
     width: 35px;
     height: 35px;
@@ -58,16 +56,16 @@ a, .bento-item, .btn {
 }
 
 /* =========================================
-   3. CABECERA Y EFECTO GLITCH
+   3. CABECERA Y EFECTO GLITCH (TAMAÑO MAX)
 ========================================= */
 .header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem; /* Más espacio */
 }
 
 .header h1 {
-    font-size: 3.5rem;
-    letter-spacing: 3px;
+    font-size: 5rem; /* Título gigante */
+    letter-spacing: 5px;
     text-transform: uppercase;
     position: relative;
     display: inline-block;
@@ -91,7 +89,7 @@ a, .bento-item, .btn {
 
 .header h1::after {
     left: -2px;
-    text-shadow: -2px 0 #8a2be2; /* Azul/Violeta */
+    text-shadow: -2px 0 #8a2be2; 
     animation: glitch-anim-2 3s infinite linear alternate-reverse;
 }
 
@@ -115,18 +113,19 @@ a, .bento-item, .btn {
 
 .header p {
     color: #888;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+    font-size: 1.5rem; /* Subtítulo más grande */
 }
 
 /* =========================================
-   4. BENTO GRID Y ANIMACIONES DE ENTRADA
+   4. BENTO GRID Y ANIMACIONES (TAMAÑO MAX)
 ========================================= */
 .bento-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-auto-rows: 200px; 
-    gap: 1.5rem;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Cajas más anchas */
+    grid-auto-rows: 300px; /* Cajas más altas */
+    gap: 2rem; /* Más separación */
+    max-width: 1400px; /* Contenedor más amplio */
     margin: 0 auto;
 }
 
@@ -147,7 +146,7 @@ a, .bento-item, .btn {
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1); 
     border-radius: 20px;
-    padding: 1.5rem;
+    padding: 2rem; /* Más espacio interno */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -158,14 +157,12 @@ a, .bento-item, .btn {
     animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Cascada de animaciones */
 .bento-item:nth-child(1) { animation-delay: 0.1s; }
 .bento-item:nth-child(2) { animation-delay: 0.3s; }
 .bento-item:nth-child(3) { animation-delay: 0.5s; }
 .bento-item:nth-child(4) { animation-delay: 0.7s; }
 .bento-item:nth-child(5) { animation-delay: 0.9s; }
 
-/* Resplandor Neón al pasar el mouse */
 .bento-item:hover {
     transform: translateY(-8px) scale(1.02);
     border-color: rgba(138, 43, 226, 0.6); 
@@ -184,8 +181,12 @@ a, .bento-item, .btn {
 }
 
 .hero h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 3.5rem; /* Texto Hero más grande */
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
 }
 
 .reel {
@@ -202,9 +203,9 @@ a, .bento-item, .btn {
     top: 1rem;
     left: 1rem;
     background: rgba(255, 255, 255, 0.1);
-    padding: 0.3rem 0.8rem;
+    padding: 0.5rem 1rem; /* Etiqueta más grande */
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     z-index: 5;
@@ -213,11 +214,12 @@ a, .bento-item, .btn {
 .btn {
     display: inline-block;
     margin-top: 1rem;
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 2rem; /* Botón más grande */
     background-color: #fff;
     color: #000;
     text-decoration: none;
     font-weight: bold;
+    font-size: 1.2rem;
     border-radius: 30px;
     text-align: center;
     transition: background-color 0.3s ease;
@@ -243,6 +245,7 @@ a, .bento-item, .btn {
     border: 2px dashed #333;
     border-radius: 10px;
     margin-top: 1.5rem;
+    font-size: 1.5rem;
 }
 
 .video-container {
@@ -284,65 +287,51 @@ a, .bento-item, .btn {
 }
 
 /* =========================================
-   7. RESPONSIVIDAD (MÓVILES)
-========================================= */
-/* =========================================
    7. RESPONSIVIDAD Y CELULARES (VERSIÓN PRO)
 ========================================= */
-
-/* 1. Desactivamos el cursor de neón en pantallas táctiles (celulares/tablets) */
 @media (pointer: coarse) {
     .cursor {
         display: none !important; 
     }
     body, a, .bento-item, .btn {
-        cursor: auto !important; /* Devuelve el comportamiento normal al tocar la pantalla */
+        cursor: auto !important; 
     }
 }
 
-/* 2. Ajustes visuales para pantallas pequeñas (menos de 768px de ancho) */
 @media (max-width: 768px) {
-    
-    /* Reducimos el margen exterior para aprovechar más la pantalla del celular */
     body {
         padding: 1rem; 
     }
 
-    /* Achicamos el título Glitch para que no se corte */
     .header h1 {
-        font-size: 2.2rem;
-        letter-spacing: 1px;
+        font-size: 3rem; /* Ajustado para que no se corte */
+        letter-spacing: 2px;
     }
     
     .header p {
-        font-size: 0.9rem;
+        font-size: 1.2rem;
     }
 
-    /* Transformamos el Bento Grid a 1 sola columna vertical */
     .bento-container {
         grid-template-columns: 1fr; 
-        grid-auto-rows: auto; /* La altura ahora se adapta al contenido de cada caja */
+        grid-auto-rows: auto; 
         gap: 1rem; 
     }
 
-    /* Quitamos la asimetría: ahora todas las cajas ocupan 1 solo espacio */
     .hero, .project, .reel {
         grid-column: span 1;
         grid-row: span 1; 
     }
 
-    /* Le damos altura extra específica al Reel para que el formato 9:16 se luzca */
     .reel {
         min-height: 550px; 
     }
 
-    /* Ajustes de los textos internos de las tarjetas */
     .hero h2 {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
     }
     
     .bento-item {
-        padding: 1.2rem;
+        padding: 1.5rem;
     }
-
 }
