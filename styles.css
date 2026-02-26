@@ -286,11 +286,63 @@ a, .bento-item, .btn {
 /* =========================================
    7. RESPONSIVIDAD (MÓVILES)
 ========================================= */
+/* =========================================
+   7. RESPONSIVIDAD Y CELULARES (VERSIÓN PRO)
+========================================= */
+
+/* 1. Desactivamos el cursor de neón en pantallas táctiles (celulares/tablets) */
+@media (pointer: coarse) {
+    .cursor {
+        display: none !important; 
+    }
+    body, a, .bento-item, .btn {
+        cursor: auto !important; /* Devuelve el comportamiento normal al tocar la pantalla */
+    }
+}
+
+/* 2. Ajustes visuales para pantallas pequeñas (menos de 768px de ancho) */
 @media (max-width: 768px) {
-    .hero, .project, .reel {
-        grid-column: span 1; 
+    
+    /* Reducimos el margen exterior para aprovechar más la pantalla del celular */
+    body {
+        padding: 1rem; 
     }
+
+    /* Achicamos el título Glitch para que no se corte */
     .header h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+        letter-spacing: 1px;
     }
+    
+    .header p {
+        font-size: 0.9rem;
+    }
+
+    /* Transformamos el Bento Grid a 1 sola columna vertical */
+    .bento-container {
+        grid-template-columns: 1fr; 
+        grid-auto-rows: auto; /* La altura ahora se adapta al contenido de cada caja */
+        gap: 1rem; 
+    }
+
+    /* Quitamos la asimetría: ahora todas las cajas ocupan 1 solo espacio */
+    .hero, .project, .reel {
+        grid-column: span 1;
+        grid-row: span 1; 
+    }
+
+    /* Le damos altura extra específica al Reel para que el formato 9:16 se luzca */
+    .reel {
+        min-height: 550px; 
+    }
+
+    /* Ajustes de los textos internos de las tarjetas */
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    
+    .bento-item {
+        padding: 1.2rem;
+    }
+
 }
