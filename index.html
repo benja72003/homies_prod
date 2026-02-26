@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homies Sprod | Portafolio Visual</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="cursor"></div>
+
+    <header class="header">
+        <h1>HOMIES SPROD.</h1>
+        <p>Edición, VFX y Estética Urbana</p>
+    </header>
+
+    <main class="bento-container">
+        <div class="bento-item hero">
+            <h2>Creando la vibra.</h2>
+            <p>Productora audiovisual especializada en videoclips, trap y contenido dinámico.</p>
+        </div>
+
+        <div class="bento-item reel">
+            <span class="tag">Reel Destacado</span>
+            <div class="video-container">
+                <iframe 
+                    src="https://www.instagram.com/reel/Cxyz12345/embed" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowtransparency="true" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <div class="bento-item project">
+            <span class="tag">VFX / After Effects</span>
+            <div class="placeholder-content">Proyecto de Edición o Video Largo</div>
+        </div>
+
+        <div class="bento-item photo">
+            <span class="tag">Fotografía</span>
+            <div class="image-container">
+                <img src="ruta-de-tu-foto.jpg" alt="Shooting urbano Homies Sprod">
+            </div>
+        </div>
+
+        <div class="bento-item contact">
+            <h3>¿Armamos algo?</h3>
+            <a href="https://www.instagram.com/homies_sprod/" target="_blank" class="btn">Ir a Instagram</a>
+        </div>
+    </main>
+
+    <script>
+        const cursor = document.querySelector('.cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+    </script>
+</body>
+</html>

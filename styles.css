@@ -1,0 +1,296 @@
+/* =========================================
+   1. RESETEO Y FONDO (INCLUYE RUIDO VISUAL)
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0d0d0d; 
+    color: #ffffff;
+    padding: 2rem;
+    background-image: radial-gradient(circle at 15% 50%, rgba(40, 40, 40, 0.4), transparent 50%);
+    cursor: none; /* Oculta el cursor por defecto */
+    overflow-x: hidden;
+}
+
+/* Efecto de Ruido (Film Grain) en el fondo */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
+    background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)"/%3E%3C/svg%3E');
+    opacity: 0.04; 
+    pointer-events: none; 
+    z-index: -1; 
+}
+
+/* =========================================
+   2. CURSOR PERSONALIZADO
+========================================= */
+a, .bento-item, .btn {
+    cursor: none;
+}
+
+.cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #8a2be2;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; 
+    z-index: 9999;
+    transition: width 0.2s, height 0.2s, background-color 0.2s; 
+}
+
+/* Interacción del cursor al pasar por tarjetas o botones */
+.bento-item:hover ~ .cursor, a:hover ~ .cursor {
+    width: 35px;
+    height: 35px;
+    background-color: rgba(138, 43, 226, 0.2);
+}
+
+/* =========================================
+   3. CABECERA Y EFECTO GLITCH
+========================================= */
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.header h1 {
+    font-size: 3.5rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+}
+
+.header h1::before, .header h1::after {
+    content: "HOMIES SPROD.";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0d0d0d;
+}
+
+.header h1::before {
+    left: 2px;
+    text-shadow: -2px 0 red;
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.header h1::after {
+    left: -2px;
+    text-shadow: -2px 0 #8a2be2; /* Azul/Violeta */
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+    0% { clip-path: inset(20% 0 80% 0); }
+    20% { clip-path: inset(60% 0 10% 0); }
+    40% { clip-path: inset(40% 0 50% 0); }
+    60% { clip-path: inset(80% 0 5% 0); }
+    80% { clip-path: inset(10% 0 70% 0); }
+    100% { clip-path: inset(30% 0 20% 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip-path: inset(10% 0 60% 0); }
+    20% { clip-path: inset(30% 0 20% 0); }
+    40% { clip-path: inset(70% 0 10% 0); }
+    60% { clip-path: inset(20% 0 50% 0); }
+    80% { clip-path: inset(50% 0 30% 0); }
+    100% { clip-path: inset(5% 0 80% 0); }
+}
+
+.header p {
+    color: #888;
+    margin-top: 0.5rem;
+}
+
+/* =========================================
+   4. BENTO GRID Y ANIMACIONES DE ENTRADA
+========================================= */
+.bento-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: 200px; 
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bento-item {
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    opacity: 0; 
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Cascada de animaciones */
+.bento-item:nth-child(1) { animation-delay: 0.1s; }
+.bento-item:nth-child(2) { animation-delay: 0.3s; }
+.bento-item:nth-child(3) { animation-delay: 0.5s; }
+.bento-item:nth-child(4) { animation-delay: 0.7s; }
+.bento-item:nth-child(5) { animation-delay: 0.9s; }
+
+/* Resplandor Neón al pasar el mouse */
+.bento-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(138, 43, 226, 0.6); 
+    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.15), 
+                inset 0 0 15px rgba(255, 255, 255, 0.05); 
+    z-index: 10;
+}
+
+/* =========================================
+   5. TAMAÑOS DE TARJETAS Y ETIQUETAS
+========================================= */
+.hero {
+    grid-column: span 2; 
+    grid-row: span 2;    
+    background: linear-gradient(135deg, rgba(40,40,40,0.8), rgba(20,20,20,0.8));
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.reel {
+    grid-row: span 2; 
+    align-items: center;
+}
+
+.project {
+    grid-column: span 2;
+}
+
+.tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 5;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 30px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    position: relative;
+    z-index: 5;
+}
+
+.btn:hover {
+    background-color: #ccc;
+}
+
+/* =========================================
+   6. CONTENEDORES DE FOTOS Y VIDEOS
+========================================= */
+.placeholder-content {
+    color: #555;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #333;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+}
+
+.video-container {
+    width: 100%;
+    height: 100%;
+    margin-top: 2rem; 
+    border-radius: 10px;
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000; 
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 400px; 
+    border: none;
+}
+
+.image-container {
+    width: 100%;
+    height: 100%;
+    margin-top: 2rem;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.4s ease; 
+}
+
+.bento-item.photo:hover img {
+    transform: scale(1.05); 
+}
+
+/* =========================================
+   7. RESPONSIVIDAD (MÓVILES)
+========================================= */
+@media (max-width: 768px) {
+    .hero, .project, .reel {
+        grid-column: span 1; 
+    }
+    .header h1 {
+        font-size: 2.5rem;
+    }
+}
