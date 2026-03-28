@@ -1,273 +1,43 @@
-/* =========================================
-   1. RESET, GLOBAL STYLES, AND THEME
-========================================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; background-color: #0d0d0d; }
+body { background-color: #0d0d0d; color: #ffffff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; cursor: none; }
 
-html {
-    /* Enables smooth scrolling between sections linked from the nav */
-    scroll-behavior: smooth;
-    background-color: #0d0d0d;
-}
+.top-nav { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; background: rgba(13, 13, 13, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 1000; }
+.nav-logo { display: flex; align-items: center; gap: 1.5rem; }
+#logo-3d-canvas { width: 48px; height: 48px; position: relative; top: -3px; }
+.nav-logo h1 { font-family: 'Montserrat', sans-serif; font-size: 2rem; font-weight: 900; letter-spacing: 2px; }
+.nav-links { list-style: none; display: flex; gap: 3rem; }
+.nav-links a { color: #fff; text-decoration: none; font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; transition: color 0.3s ease; }
+.nav-links a:hover { color: #8a2be2; }
 
-body {
-    background-color: #0d0d0d;
-    color: #ffffff;
-    font-family: 'Montserrat', sans-serif; /* Primary sans-serif for content */
-    overflow-x: hidden;
-    cursor: none; /* Personalized cursor hides normal pointer */
-}
+.main-wrapper { padding-top: 10rem; padding-bottom: 5rem; width: 100%; max-width: 1400px; margin: 0 auto; }
+.header h1 { font-family: 'Cinzel', serif; font-size: 7rem; font-weight: 900; text-align: center; letter-spacing: 5px; margin-bottom: 2rem; line-height: 1.1; }
+.header p { font-size: 2rem; text-align: center; font-weight: 700; color: #888; margin-bottom: 6rem; }
 
-/* =========================================
-   2. TOP NAVIGATION (Lyrical Lemonade style)
-========================================= */
-.top-nav {
-    position: fixed; /* Nav stays at top of viewport */
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 4rem;
-    background: rgba(13, 13, 13, 0.95); /* Semi-transparent dark background */
-    backdrop-filter: blur(10px); /* Blur behind the nav */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    z-index: 1000; /* Ensure nav is on top */
-}
+.cursor { position: fixed; width: 20px; height: 20px; border: 2px solid #8a2be2; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s; }
+a:hover ~ .cursor, .grid-item:hover ~ .cursor { width: 35px; height: 35px; background-color: rgba(138, 43, 226, 0.2); }
 
-.nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
+.grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; width: 100%; }
+.grid-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 3rem; display: flex; flex-direction: column; }
+.grid-item h2 { font-family: 'Cinzel', serif; font-size: 3rem; font-weight: 900; margin-bottom: 2rem; color: #fff; }
+.video-section, .photo-section { grid-column: span 1; }
+.networks-section { grid-column: span 2; align-items: center; justify-content: center; background: transparent; border: none; margin-top: 4rem; }
+.networks-section h2 { text-align: center; font-size: 3.5rem; }
 
-/* New Three.js canvas position for the spinning logo */
-#logo-3d-canvas {
-    width: 48px;
-    height: 48px;
-    position: relative;
-    top: -3px; /* Subtle align shift */
-}
+.video-container { width: 100%; height: 500px; border-radius: 5px; overflow: hidden; }
+.video-container iframe { width: 100%; height: 100%; border: none; }
 
-.nav-logo h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2rem;
-    font-weight: 900;
-    letter-spacing: 2px;
-}
+.photo-placeholder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%; }
+.photo-box { position: relative; border-radius: 5px; overflow: hidden; background: #000; height: 200px; }
+.photo-box img { width: 100%; height: 100%; object-fit: cover; }
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 3rem;
-}
+.btn { display: inline-block; padding: 1rem 3rem; background-color: #fff; color: #000; text-decoration: none; font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 900; text-align: center; margin-top: 2rem; transition: background-color 0.3s ease, transform 0.2s ease; }
+.btn:hover { background-color: #8a2be2; color: #fff; transform: scale(1.05); }
 
-.nav-links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #8a2be2; /* Subtle accent color on hover */
-}
-
-/* =========================================
-   3. MAIN WRAPPER AND TYPOGRAPHY
-========================================= */
-.main-wrapper {
-    /* Offset main content below fixed navbar */
-    padding-top: 10rem;
-    padding-bottom: 5rem;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-/* Global massive serif heading style */
-.header h1 {
-    font-family: 'Cinzel', serif; /* Bold, classic serif font */
-    font-size: 7rem;
-    font-weight: 900;
-    text-align: center;
-    letter-spacing: 5px;
-    margin-bottom: 2rem;
-    line-height: 1.1;
-}
-
-.header p {
-    font-size: 2rem;
-    text-align: center;
-    font-weight: 700;
-    color: #888;
-    margin-bottom: 6rem;
-}
-
-/* =========================================
-   4. CURSOR SYMMETRICAL ELEMENT
-========================================= */
-.cursor {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #8a2be2;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 9999;
-    transition: width 0.2s, height 0.2s, background-color 0.2s;
-}
-
-/* Hover effect on interactive elements expands cursor */
-a:hover ~ .cursor, .bento-item:hover ~ .cursor {
-    width: 35px;
-    height: 35px;
-    background-color: rgba(138, 43, 226, 0.2);
-}
-
-/* =========================================
-   5. GRID LAYOUT FOR CONTENT
-========================================= */
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Clean two-column layout */
-    gap: 2rem;
-    width: 100%;
-}
-
-.grid-item {
-    background: rgba(255, 255, 255, 0.03); /* Minimal transparency box */
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    padding: 3rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.grid-item h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 3rem;
-    font-weight: 900;
-    margin-bottom: 2rem;
-    color: #fff;
-    text-align: left;
-}
-
-/* Content flows vertically in sections */
-.video-section, .photo-section {
-    grid-column: span 1;
-}
-
-/* Place networks below other content across both columns */
-.networks-section {
-    grid-column: span 2;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: none;
-    margin-top: 4rem;
-}
-
-.networks-section h2 {
-    text-align: center;
-    font-size: 3.5rem;
-}
-
-/* =========================================
-   6. CLEAN CONTENT PLACEHOLDERS
-========================================= */
-/* Video placeholder box */
-.video-placeholder {
-    width: 100%;
-    height: 400px;
-    background: #000;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #555;
-    font-weight: 800;
-}
-
-.play-icon {
-    font-size: 6rem;
-    margin-bottom: 1rem;
-    color: #8a2be2; /* Accent color on play button */
-}
-
-/* Clean photo grid interface */
-.photo-placeholder-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    width: 100%;
-}
-
-.photo-box {
-    position: relative;
-    border-radius: 5px;
-    overflow: hidden;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-}
-
-/* Symmetrical crop for photo placeholders */
-.photo-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.8;
-}
-
-/* File name placeholder text */
-.photo-box span {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    color: #fff;
-    font-weight: 800;
-    font-size: 0.8rem;
-    background: rgba(0,0,0,0.5);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-
-/* Empty placeholder box */
-.empty-box {
-    color: #444;
-    font-weight: 900;
-}
-
-/* New bold symmetrical button style */
-.btn {
-    display: inline-block;
-    padding: 1rem 3rem;
-    background-color: #fff;
-    color: #000;
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1.5rem;
-    font-weight: 900;
-    border-radius: 0; /* Squared edges for LL style */
-    text-align: center;
-    margin-top: 2rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn:hover {
-    background-color: #8a2be2;
-    color: #fff;
-    transform: scale(1.05); /* Slight symmetrical expansion on hover */
+@media (max-width: 768px) {
+    .grid-container { grid-template-columns: 1fr; }
+    .video-section, .photo-section, .networks-section { grid-column: span 1; }
+    .header h1 { font-size: 3.5rem; }
+    .top-nav { flex-direction: column; padding: 1rem; }
+    .nav-links { gap: 1.5rem; margin-top: 1rem; }
 }
