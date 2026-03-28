@@ -1,51 +1,49 @@
-let scene, camera, renderer, coinDisc;
+// logo3d.js
+const container = document.getElementById('3d-container');
 
-function init3DLogo() {
-    const canvasContainer = document.getElementById('logo-3d-canvas');
-    if (!canvasContainer) return; 
-
-    const width = canvasContainer.clientWidth;
-    const height = canvasContainer.clientHeight;
-
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.z = 2.5; 
-
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); 
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio); 
-    canvasContainer.appendChild(renderer.domElement); 
-
-    const geometry = new THREE.CylinderGeometry(1, 1, 0.1, 32); 
+if (container) {
+    // 1. Escena y Cámara
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
     
+    // 2. Renderizador (Fondo transparente)
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
+
+    // 3. Controles Interactivos (Permite arrastrar y girar con el mouse)
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true; // Movimiento suave
+    controls.dampingFactor = 0.05;
+    controls.enableZoom = false; // Desactiva el scroll para no deformar la página
+
+    // 4. Crear el Objeto Masivo (Un cubo grande con tu logo)
+    const geometry = new THREE.BoxGeometry(3.5, 3.5, 3.5); 
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load(
-        'logo.png', // Aquí busca tu logo.png
-        function (texture) {
-            const material = new THREE.MeshBasicMaterial({ map: texture });
-            coinDisc = new THREE.Mesh(geometry, material);
-            coinDisc.rotation.x = Math.PI / 2; 
-            scene.add(coinDisc);
-            animateLogo();
-        },
-        undefined, 
-        function (err) {
-            console.error('Error cargando el logo:', err);
-            const material = new THREE.MeshBasicMaterial({ color: 0x8a2be2 });
-            coinDisc = new THREE.Mesh(geometry, material);
-            coinDisc.rotation.x = Math.PI / 2;
-            scene.add(coinDisc);
-            animateLogo();
+    
+    textureLoader.load('logo.png', function(texture) {
+        const material = new THREE.MeshBasicMaterial({ map: texture });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 6; // Aleja la cámara para ver el objeto completo
+
+        // 5. Animación en bucle
+        function animate() {
+            requestAnimationFrame(animate);
+            // Rotación automática muy lenta
+            cube.rotation.y += 0.003;
+            cube.rotation.x += 0.002;
+            controls.update(); // Actualiza los controles del mouse
+            renderer.render(scene, camera);
         }
-    );
-}
+        animate();
+    });
 
-function animateLogo() {
-    requestAnimationFrame(animateLogo);
-    if (coinDisc) {
-        coinDisc.rotation.y += 0.01; // Velocidad de giro
-    }
-    renderer.render(scene, camera);
+    // Ajustar si la pantalla cambia de tamaño
+    window.addEventListener('resize', () => {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+    });
 }
-
-document.addEventListener('DOMContentLoaded', init3DLogo);
