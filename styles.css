@@ -1,11 +1,30 @@
-/* styles.css */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial Black', Impact, sans-serif; }
-body { background-color: #050505; color: #fff; overflow-x: hidden; }
+/* =========================================
+   1. RESETEO, FONDO Y TIPOGRAFÍA BOLD
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Fuente Arial Black para letras gigantes y agresivas */
+    font-family: 'Arial Black', Impact, sans-serif;
+}
 
-/* Estructura Lyrical Lemonade: Menú izquierdo, Contenido derecho */
-.layout { display: flex; width: 100vw; height: 100vh; }
+body {
+    background-color: #050505; /* Negro profundo */
+    color: #fff;
+    overflow-x: hidden;
+}
 
-/* Menú lateral izquierdo */
+/* =========================================
+   2. NAVEGACIÓN LATERAL FIJA (Estilo LL)
+========================================= */
+.layout {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Menú lateral estático */
 .sidebar { 
     width: 300px; 
     padding: 3rem 2rem; 
@@ -14,8 +33,19 @@ body { background-color: #050505; color: #fff; overflow-x: hidden; }
     background: transparent;
     z-index: 10;
 }
-.sidebar-logo { width: 80px; margin-bottom: 3rem; }
-.nav-links { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
+
+.sidebar-logo {
+    width: 80px; /* Ajusta según tu logo.png */
+    margin-bottom: 3rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Separación entre botones */
+}
+
 .nav-links a { 
     color: #444; /* Letras apagadas por defecto */
     text-decoration: none; 
@@ -23,19 +53,79 @@ body { background-color: #050505; color: #fff; overflow-x: hidden; }
     text-transform: uppercase; 
     transition: color 0.2s, transform 0.2s; 
 }
-.nav-links a:hover, .nav-links a.active { color: #fff; transform: translateX(10px); }
 
-/* Contenedor derecho para el 3D o el contenido */
-.content { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; overflow-y: auto; padding: 2rem; }
+/* Efecto al pasar el mouse o página activa */
+.nav-links a:hover, .nav-links a.active { 
+    color: #fff; 
+    transform: translateX(10px); 
+}
+
+/* =========================================
+   3. CONTENIDO PRINCIPAL Y PÁGINAS DE FOTOS
+========================================= */
+/* Contenedor derecho para el 3D gigante o el contenido */
+.content {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto; /* Permite scroll solo en esta área */
+    padding: 2rem;
+}
+
+/* Área para inyectar Three.js gigante e interactivo */
+#3d-container {
+    width: 100%;
+    height: 100%;
+}
 
 /* Cuadrículas para las páginas de videos y fotos */
-.media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; width: 100%; max-width: 1200px; margin: auto; align-items: start; }
-.media-box { width: 100%; background: #111; border-radius: 15px; overflow: hidden; }
-.media-box img, .media-box iframe { width: 100%; height: 100%; min-height: 500px; object-fit: cover; border: none; }
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    align-items: start;
+}
 
+.media-box {
+    width: 100%;
+    background: #111;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.media-box img, .media-box iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    object-fit: cover;
+    border: none;
+}
+
+/* =========================================
+   7. CELULARES Y TABLETS (RESPONSIVO)
+========================================= */
 @media (max-width: 768px) {
-    .layout { flex-direction: column; height: auto; }
-    .sidebar { width: 100%; padding: 1.5rem; align-items: center; }
-    .nav-links { flex-direction: row; flex-wrap: wrap; justify-content: center; font-size: 1.5rem; }
-    .content { height: 70vh; }
+    .layout {
+        flex-direction: column;
+        height: auto;
+    }
+    .sidebar {
+        width: 100%;
+        padding: 1.5rem;
+        align-items: center;
+    }
+    .nav-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+    .content {
+        height: 70vh; /* Espacio para el 3D gigante */
+    }
 }
