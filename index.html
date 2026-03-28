@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homies Sprod | Portafolio Visual</title>
+    <title>Homies Sprod | Visual Production</title>
     <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,7 +14,8 @@
 
     <nav class="top-nav">
         <div class="nav-logo">
-            <h2>HOMIES.</h2>
+            <div id="logo-3d-canvas"></div>
+            <h1>HOMIES.</h1>
         </div>
         <ul class="nav-links">
             <li><a href="#videos">VIDEOS</a></li>
@@ -25,44 +27,33 @@
     <div class="main-wrapper">
         <header class="header">
             <h1>HOMIES SPROD.</h1>
-            <p>Edición, VFX y Estética Urbana</p>
+            <p>Edition, VFX, and Urban Aesthetic</p>
         </header>
 
-        <main class="bento-container">
-            <div class="bento-item hero">
-                <h2>Creando la vibra.</h2>
-                <p>Productora audiovisual especializada en videoclips, trap y contenido dinámico.</p>
-            </div>
-
-            <div id="videos" class="bento-item reel">
-                <span class="tag">Reel Destacado</span>
-                <div class="video-container">
-                    <iframe 
-                        src="https://www.instagram.com/reel/DJdePhkNzbR/embed" 
-                        frameborder="0" 
-                        scrolling="no" 
-                        allowtransparency="true" 
-                        allowfullscreen>
-                    </iframe>
+        <main class="grid-container">
+            
+            <section id="videos" class="grid-item video-section">
+                <h2>Reel Destacado</h2>
+                <div class="video-placeholder">
+                    <div class="play-icon">▶</div>
+                    <span>Placeholder for future video embed</span>
                 </div>
-            </div>
-
-            <div class="bento-item project">
-                <span class="tag">VFX / After Effects</span>
-                <div class="placeholder-content">Próximos Proyectos</div>
-            </div>
-
-            <div id="fotos" class="bento-item photo">
-                <span class="tag">Fotografía</span>
-                <div class="image-container">
-                    <img src="foto1.jpg" alt="Shooting urbano Homies Sprod">
+            </section>
+            
+            <section id="fotos" class="grid-item photo-section">
+                <h2>Fotografía</h2>
+                <div class="photo-placeholder-grid">
+                    <div class="photo-box"><img src="foto1.jpg" alt="Photo Placeholder 1"><span>`foto1.jpg`</span></div>
+                    <div class="photo-box"><img src="foto2.jpg" alt="Photo Placeholder 2"><span>`foto2.jpg`</span></div>
+                    <div class="photo-box"><div class="empty-box">`foto4.jpg`</div></div> 
                 </div>
-            </div>
+            </section>
+            
+            <section id="redes" class="grid-item networks-section">
+                <h2>¿Armamos algo?</h2>
+                <a href="https://www.instagram.com/homies_sprod/" target="_blank" class="btn">VISITAR INSTAGRAM</a>
+            </section>
 
-            <div id="redes" class="bento-item contact">
-                <h3>¿Armamos algo?</h3>
-                <a href="https://www.instagram.com/homies_sprod/" target="_blank" class="btn">Ir a Instagram</a>
-            </div>
         </main>
     </div>
 
@@ -73,5 +64,9 @@
             cursor.style.top = e.clientY + 'px';
         });
     </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="logo3d.js"></script>
+
 </body>
 </html>
